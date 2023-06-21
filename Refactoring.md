@@ -12,13 +12,13 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 
 Explanation:
 
-Simplified Conditional Assignment:
+# Simplified Conditional Assignment:
 
-The original code had nested if statements to determine the candidate value. By using the conditional (ternary) operator ? :, we can achieve the same result in a more concise way. The condition event && event.partitionKey checks if event and event.partitionKey are truthy, and if so, assigns event.partitionKey to candidate. Otherwise, it falls back to JSON.stringify(event || TRIVIAL_PARTITION_KEY).
-Type Checking:
+-   The original code had nested if statements to determine the candidate value. By using the conditional (ternary) operator ? :, we can achieve the same result in a more concise way. The condition event && event.partitionKey checks if event and event.partitionKey are truthy, and if so, assigns event.partitionKey to candidate. Otherwise, it falls back to JSON.stringify(event || TRIVIAL_PARTITION_KEY).
+    Type Checking:
 
-Instead of checking the type of candidate using an if statement, we can simplify it by directly applying JSON.stringify to ensure it's a string. This eliminates an unnecessary conditional block and reduces complexity.
+-   Instead of checking the type of candidate using an if statement, we can simplify it by directly applying JSON.stringify to ensure it's a string. This eliminates an unnecessary conditional block and reduces complexity.
 
-Ternary Operator for Hashing:
+# Ternary Operator for Hashing:
 
-Rather than using an if-else statement to decide whether to hash the candidate or not, we can use a conditional (ternary) operator ? : to conditionally assign the hashed value to candidate. If the length of candidate exceeds MAX_PARTITION_KEY_LENGTH, it gets hashed using crypto.createHash("sha3-512").
+-   Rather than using an if-else statement to decide whether to hash the candidate or not, we can use a conditional (ternary) operator ? : to conditionally assign the hashed value to candidate. If the length of candidate exceeds MAX_PARTITION_KEY_LENGTH, it gets hashed using crypto.createHash("sha3-512").
