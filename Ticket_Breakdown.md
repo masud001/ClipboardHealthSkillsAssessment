@@ -16,10 +16,7 @@ You will be graded on the level of detail in each ticket, the clarity of the exe
 
 ## Your Breakdown Here
 
-## Ticket 1: Add custom Agent IDs for Facilities
-
-Description:
-Currently, the reports generated for Facilities use the internal database ID of each Agent. To allow Facilities to use their own custom IDs for Agents, we need to update the database schema and functionality accordingly.
+## Ticket 1: Add custom Agent IDs for Facilities.
 
 # Acceptance Criteria:
 
@@ -39,10 +36,6 @@ Update the report generation process to use the custom ID instead of the interna
 
 ## Ticket 2: Update report generation process
 
-# Description:
-
-Currently, the report generation process uses the internal database ID of Agents. With the new custom ID feature, the report generation process needs to be updated to use the custom ID when generating reports.
-
 # Acceptance Criteria:
 
 The report generation process is modified to retrieve the custom ID for each Agent from the database.
@@ -58,10 +51,6 @@ Update the report template or generation logic to include the custom ID instead 
 Test the report generation process to ensure that the custom IDs are correctly displayed in the generated reports.
 
 ## Ticket 3: Update documentation and user guides
-
-# Description:
-
-With the introduction of the custom ID feature, the documentation and user guides need to be updated to provide instructions on how Facilities can save and use custom IDs for Agents.
 
 # Acceptance Criteria:
 
@@ -80,9 +69,6 @@ Include relevant examples or screenshots to enhance understanding.
 Note: Depending on the complexity and existing documentation, this ticket can be merged with Ticket 2 if the changes are minimal.
 
 ## Ticket 4 (Optional): Migration script for existing data
-
-#Description:
-To ensure consistency and data integrity, a migration script can be developed to update existing data and populate the custom ID field based on any relevant mapping provided by the Facilities.
 
 # Acceptance Criteria:
 
