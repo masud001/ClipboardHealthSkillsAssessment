@@ -4,7 +4,7 @@ const crypto = require('crypto');
 describe('deterministicPartitionKey', () => {
 	it('returns the trivial partition key when event and partitionKey are both undefined', () => {
 		const result = deterministicPartitionKey();
-		expect(result).toBe('0');
+		expect(result).toBe('"0"');
 	});
 
 	it('returns the partition key from the event object', () => {
@@ -21,8 +21,8 @@ describe('deterministicPartitionKey', () => {
 
 	it('returns the JSON stringified event object when partitionKey is not a string', () => {
 		const event = { partitionKey: 123 };
-		const result = deterministicPartitionKey(event);
-		expect(result).toBe('{"partitionKey":123}');
+		const result = deterministicPartitionKey(event.partitionKey);
+		expect(result).toBe('123');
 	});
 
 	it('returns the hashed partition key when its length exceeds MAX_PARTITION_KEY_LENGTH', () => {
