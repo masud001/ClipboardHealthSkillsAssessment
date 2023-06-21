@@ -9,3 +9,13 @@ You've been asked to refactor the function `deterministicPartitionKey` in [`dpk.
 You will be graded on the exhaustiveness and quality of your unit tests, the depth of your refactor, and the level of insight into your thought process provided by the written explanation.
 
 ## Your Explanation Here
+
+Explanation:
+
+1. Removed unnecessary nested if statements: By assigning event.partitionKey directly to candidate, we eliminate one level of nesting.
+
+2. Simplified conditionals: Instead of checking event and candidate separately, we combine the checks using logical operators (&& and !).
+
+3. Removed redundant type conversion: Since JSON.stringify always returns a string, we can remove the additional check and conversion.
+
+4. Consolidated code duplication: The hash generation logic can be moved outside the if block to avoid repetition.

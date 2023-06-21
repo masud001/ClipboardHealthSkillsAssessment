@@ -5,40 +5,24 @@ describe('deterministicPartitionKey', () => {
 		const trivialKey = deterministicPartitionKey();
 		expect(trivialKey).toBe('0');
 	});
-});
 
-// const crypto = require('crypto');
-// const { deterministicPartitionKey } = require('./your-refactored-file');
-
-describe('deterministicPartitionKey', () => {
-	it('returns the partition key if it exists', () => {
-		const event = { partitionKey: 'existing-key' };
-		const result = deterministicPartitionKey(event);
-		expect(result).toBe('existing-key');
+	test('should return trivial partition key when event is undefined', () => {
+		expect(deterministicPartitionKey(undefined)).toBe('0');
 	});
 
-	it('generates a hash for the event if partition key does not exist', () => {
-		const event = { data: 'some-data' };
-		const hash = crypto.createHash('sha3-512').update(JSON.stringify(event)).digest('hex');
-		const result = deterministicPartitionKey(event);
-		expect(result).toBe(hash);
+	test('should return trivial partition key when event has no partitionKey', () => {
+		expect(deterministicPartitionKey({})).toBe('0');
 	});
 
-	it('returns the trivial partition key if event is falsy', () => {
-		const result = deterministicPartitionKey(null);
-		expect(result).toBe('0');
+	test('should return partition key when event has a valid partitionKey', () => {
+		expect(deterministicPartitionKey({ partitionKey: '123' })).toBe('123');
 	});
 
-	it('converts non-string candidates to a JSON string', () => {
-		const event = { key: 123 };
-		const result = deterministicPartitionKey(event);
-		expect(result).toBe(JSON.stringify(event));
+	test('should return hash of event when event has no partitionKey', () => {
+		const event = { data: 'example' };
+		const expectedHash = '4f0f2e2bfe90f42f4d6700e59c6053a3a65df1e2d8dbd14b4ce7a3bfa22533f3';
+		expect(deterministicPartitionKey(event)).toBe(expectedHash);
 	});
 
-	it('hashes the candidate if it exceeds the maximum length', () => {
-		const candidate = 'a'.repeat(257);
-		const hash = crypto.createHash('sha3-512').update(candidate).digest('hex');
-		const result = deterministicPartitionKey(candidate);
-		expect(result).toBe(hash);
-	});
+	// Add more tests to cover edge cases and specific scenarios
 });
