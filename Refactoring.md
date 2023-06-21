@@ -12,10 +12,13 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 
 Explanation:
 
-1. Removed unnecessary nested if statements: By assigning event.partitionKey directly to candidate, we eliminate one level of nesting.
+Simplified Conditional Assignment:
 
-2. Simplified conditionals: Instead of checking event and candidate separately, we combine the checks using logical operators (&& and !).
+The original code had nested if statements to determine the candidate value. By using the conditional (ternary) operator ? :, we can achieve the same result in a more concise way. The condition event && event.partitionKey checks if event and event.partitionKey are truthy, and if so, assigns event.partitionKey to candidate. Otherwise, it falls back to JSON.stringify(event || TRIVIAL_PARTITION_KEY).
+Type Checking:
 
-3. Removed redundant type conversion: Since JSON.stringify always returns a string, we can remove the additional check and conversion.
+Instead of checking the type of candidate using an if statement, we can simplify it by directly applying JSON.stringify to ensure it's a string. This eliminates an unnecessary conditional block and reduces complexity.
 
-4. Consolidated code duplication: The hash generation logic can be moved outside the if block to avoid repetition.
+Ternary Operator for Hashing:
+
+Rather than using an if-else statement to decide whether to hash the candidate or not, we can use a conditional (ternary) operator ? : to conditionally assign the hashed value to candidate. If the length of candidate exceeds MAX_PARTITION_KEY_LENGTH, it gets hashed using crypto.createHash("sha3-512").

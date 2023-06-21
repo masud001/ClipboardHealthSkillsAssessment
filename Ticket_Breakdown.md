@@ -16,53 +16,62 @@ You will be graded on the level of detail in each ticket, the clarity of the exe
 
 ## Your Breakdown Here
 
+## Ticket 1: Add custom Agent IDs for Facilities
+
 Description:
 Currently, the reports generated for Facilities use the internal database ID of each Agent. To allow Facilities to use their own custom IDs for Agents, we need to update the database schema and functionality accordingly.
 
-Acceptance Criteria:
+# Acceptance Criteria:
 
 The database schema is updated to include a new field called "custom_id" in the Agents table.
 Facilities can save and update custom IDs for each Agent they work with.
 The existing functionality of retrieving Shifts by Facility is not affected by this update.
 The custom ID is used in the report generation process instead of the internal database ID.
-Effort Estimate: 4 hours
 
-Implementation Details:
+# Effort Estimate: 4 hours
+
+# Implementation Details:
 
 Modify the Agents table in the database schema to include a new column called "custom_id" (datatype: varchar).
 Implement an API endpoint or user interface for Facilities to save and update custom IDs for Agents.
 Update the existing data access layer to include the new "custom_id" field when retrieving Agent information.
 Update the report generation process to use the custom ID instead of the internal database ID.
-Ticket 2: Update report generation process
 
-Description:
+## Ticket 2: Update report generation process
+
+# Description:
+
 Currently, the report generation process uses the internal database ID of Agents. With the new custom ID feature, the report generation process needs to be updated to use the custom ID when generating reports.
 
-Acceptance Criteria:
+# Acceptance Criteria:
 
 The report generation process is modified to retrieve the custom ID for each Agent from the database.
 The custom ID is used in the report instead of the internal database ID.
 The report format remains unchanged and is still generated as a PDF.
-Effort Estimate: 3 hours
 
-Implementation Details:
+# Effort Estimate: 3 hours
+
+# Implementation Details:
 
 Modify the existing report generation code to retrieve the custom ID for each Agent.
 Update the report template or generation logic to include the custom ID instead of the internal database ID.
 Test the report generation process to ensure that the custom IDs are correctly displayed in the generated reports.
-Ticket 3: Update documentation and user guides
 
-Description:
+## Ticket 3: Update documentation and user guides
+
+# Description:
+
 With the introduction of the custom ID feature, the documentation and user guides need to be updated to provide instructions on how Facilities can save and use custom IDs for Agents.
 
-Acceptance Criteria:
+# Acceptance Criteria:
 
 The documentation is updated to include information about the new custom ID feature.
 Instructions are provided on how Facilities can save and update custom IDs for Agents.
 Examples or screenshots are included to illustrate the process.
-Effort Estimate: 2 hours
 
-Implementation Details:
+# Effort Estimate: 2 hours
+
+# Implementation Details:
 
 Review the existing documentation and user guides.
 Add a new section explaining the custom ID feature and its usage.
@@ -70,18 +79,19 @@ Provide step-by-step instructions on how Facilities can save and update custom I
 Include relevant examples or screenshots to enhance understanding.
 Note: Depending on the complexity and existing documentation, this ticket can be merged with Ticket 2 if the changes are minimal.
 
-Ticket 4 (Optional): Migration script for existing data
+## Ticket 4 (Optional): Migration script for existing data
 
-Description:
+#Description:
 To ensure consistency and data integrity, a migration script can be developed to update existing data and populate the custom ID field based on any relevant mapping provided by the Facilities.
 
-Acceptance Criteria:
+# Acceptance Criteria:
 
 Develop a migration script that updates the custom ID field for existing Agents based on the mapping provided by Facilities.
 The migration script handles potential errors and inconsistencies in the mapping data.
-Effort Estimate: 4 hours
 
-Implementation Details:
+# Effort Estimate: 4 hours
+
+# Implementation Details:
 
 Analyze the existing data and determine the mapping requirements from Facilities.
 Develop a script that iterates over existing Agents and updates their custom ID based on the mapping.

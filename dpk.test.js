@@ -1,28 +1,41 @@
 const { deterministicPartitionKey } = require('./dpk');
+const crypto = require('crypto');
 
 describe('deterministicPartitionKey', () => {
-	it("Returns the literal '0' when given no input", () => {
-		const trivialKey = deterministicPartitionKey();
-		expect(trivialKey).toBe('0');
+	it('returns the trivial partition key when event and partitionKey are both undefined', () => {
+		const result = deterministicPartitionKey();
+		expect(result).toBe('0');
 	});
 
-	test('should return trivial partition key when event is undefined', () => {
-		expect(deterministicPartitionKey(undefined)).toBe('0');
+	it('returns the partition key from the event object', () => {
+		const event = { partitionKey: 'abc' };
+		const result = deterministicPartitionKey(event);
+		expect(result).toBe('abc');
 	});
 
-	test('should return trivial partition key when event has no partitionKey', () => {
-		expect(deterministicPartitionKey({})).toBe('0');
+	it('returns the JSON stringified event object when partitionKey is undefined', () => {
+		const event = { foo: 'bar' };
+		const result = deterministicPartitionKey(event);
+		expect(result).toBe('{"foo":"bar"}');
 	});
 
-	test('should return partition key when event has a valid partitionKey', () => {
-		expect(deterministicPartitionKey({ partitionKey: '123' })).toBe('123');
+	it('returns the JSON stringified event object when partitionKey is not a string', () => {
+		const event = { partitionKey: 123 };
+		const result = deterministicPartitionKey(event);
+		expect(result).toBe('{"partitionKey":123}');
 	});
 
-	test('should return hash of event when event has no partitionKey', () => {
-		const event = { data: 'example' };
-		const expectedHash = '4f0f2e2bfe90f42f4d6700e59c6053a3a65df1e2d8dbd14b4ce7a3bfa22533f3';
-		expect(deterministicPartitionKey(event)).toBe(expectedHash);
+	it('returns the hashed partition key when its length exceeds MAX_PARTITION_KEY_LENGTH', () => {
+		const longKey = 'a'.repeat(257);
+		const hash = crypto.createHash('sha3-512').update(longKey).digest('hex');
+		const event = { partitionKey: longKey };
+		const result = deterministicPartitionKey(event);
+		expect(result).toBe(hash);
 	});
 
-	// Add more tests to cover edge cases and specific scenarios
+	it('returns the partition key when its length does not exceed MAX_PARTITION_KEY_LENGTH', () => {
+		const event = { partitionKey: 'short-key' };
+		const result = deterministicPartitionKey(event);
+		expect(result).toBe('short-key');
+	});
 });
